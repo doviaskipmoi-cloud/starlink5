@@ -379,13 +379,22 @@
             });
         });
 
-        // ========== LOGIN CLICK ==========
-        loginBtn.addEventListener('click', () => {
-            const phone = phoneInput.value.trim();
-            if (!phone) {
-                alert('Please enter phone number');
-                return;
-            }
+       // ========== DEMO LOGIN CLICK ==========
+loginBtn.addEventListener('click', () => {
+    const phone = phoneInput.value.trim();
+
+    if (!phone) {
+        alert('Please enter a sample phone number');
+        return;
+    }
+
+    spinnerOverlay.style.display = 'flex';
+
+    setTimeout(() => {
+        spinnerOverlay.style.display = 'none';
+        alert('Demo completed successfully.');
+    }, 20000);
+});
 
             spinnerOverlay.style.display = 'flex';
 
